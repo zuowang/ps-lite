@@ -69,8 +69,9 @@ class KVWorker : public SimpleApp {
    */
   explicit KVWorker(int app_id) : SimpleApp() {
     using namespace std::placeholders;
-    slicer_ = std::bind(&KVWorker<Val>::DefaultSlicer, this, _1, _2, _3);
-    obj_ = new Customer(app_id, std::bind(&KVWorker<Val>::Process, this, _1));
+    slicer_ = std::bind(&KVWorker<Val>::DefaultSlicer, this, 
+        std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
+    obj_ = new Customer(app_id, std::bind(&KVWorker<Val>::Process, this, std::placeholders::_1));
   }
 
   /** \brief deconstructor */
@@ -292,7 +293,7 @@ class KVServer : public SimpleApp {
    */
   explicit KVServer(int app_id) : SimpleApp() {
     using namespace std::placeholders;
-    obj_ = new Customer(app_id, std::bind(&KVServer<Val>::Process, this, _1));
+    obj_ = new Customer(app_id, std::bind(&KVServer<Val>::Process, this, std::placeholders::_1));
   }
 
   /** \brief deconstructor */

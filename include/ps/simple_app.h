@@ -122,7 +122,7 @@ class SimpleApp {
 
 inline SimpleApp::SimpleApp(int app_id) : SimpleApp() {
   using namespace std::placeholders;
-  obj_ = new Customer(app_id, std::bind(&SimpleApp::Process, this, _1));
+  obj_ = new Customer(app_id, std::bind(&SimpleApp::Process, this, std::placeholders::_1));
 }
 
 inline int SimpleApp::Request(int req_head, const std::string& req_body, int recv_id) {
